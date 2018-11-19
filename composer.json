@@ -1,0 +1,27 @@
+{
+    "name": "matok/ws-dns",
+    "type": "project",
+    "authors": [
+        {
+            "name": "Matej Kuna",
+            "email": "mat.kuna@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "WS\\": "src/"
+        }
+    },
+    "require": {
+        "twbs/bootstrap": "^3.3",
+        "guzzlehttp/guzzle": "^6.3"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^7.4"
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "WS\\Tests\\": "tests/"
+        }
+    }
+}
