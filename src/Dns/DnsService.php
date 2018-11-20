@@ -8,6 +8,7 @@ use WS\Dns\RecordFactory\RecordFactory;
 
 class DnsService implements DnsServiceInterface
 {
+    /** @var Credentials  */
     private $credentials;
 
     public function __construct(Credentials $credentials)
@@ -31,16 +32,21 @@ class DnsService implements DnsServiceInterface
         return $result;
     }
 
-    public function createRecord(AbstractRecord $record): bool
+    public function createRecord(AbstractRecord $record)
     {
         $serviceUrl = 'https://rest.websupport.sk/v1/user/self/zone/'.$this->credentials->getDomain().'/record';
         $curl = $this->initCurlWithAuth($serviceUrl);
         curl_setopt($curl, CURLOPT_POST, true);
-        curl_setopt($curl, CURLOPT_POSTFIELDS, json_encode($record->getData()));
+        curl_setopt($curl, CURLOPT_POSTFIELDS, (string) json_encode($record->getData()));
+
         $response = json_decode(curl_exec($curl), true);
         curl_close($curl);
 
-        return $response['status'] === 'success';
+        if ($response['status'] != 'success') {
+            return serialize($response);
+        }
+
+        return true;
     }
 
     public function deleteRecord(string $id)

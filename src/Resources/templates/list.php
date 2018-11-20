@@ -47,6 +47,14 @@
     <div class="starter-template">
         <h1>List of records</h1>
 
+        <?php foreach($flashMessage->getMessages('success') as $message): ?>
+            <div class="alert alert-success" role="alert"><?php echo htmlspecialchars($message); ?></div>
+        <?php endforeach; ?>
+
+        <?php foreach($flashMessage->getMessages('error') as $message): ?>
+            <div class="alert alert-danger" role="alert"><?php echo htmlspecialchars($message); ?></div>
+        <?php endforeach; ?>
+
         <table class="table table-hover">
             <thead>
                 <th>Type</th>

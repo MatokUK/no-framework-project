@@ -46,6 +46,16 @@
 
     <div class="starter-template">
         <h1>Create new record</h1>
+
+        <?php foreach($flashMessage->getMessages('success') as $message): ?>
+            <div class="alert alert-success" role="alert"><?php echo htmlspecialchars($message); ?></div>
+        <?php endforeach; ?>
+
+        <?php foreach($flashMessage->getMessages('error') as $message): ?>
+            <div class="alert alert-danger" role="alert"><?php echo htmlspecialchars($message); ?></div>
+        <?php endforeach; ?>
+
+
         <form method="post" action="/create">
             <div class="form-group">
                 <label for="type">Type</label>

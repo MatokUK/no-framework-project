@@ -26,7 +26,7 @@ abstract class AbstractRecord
 
     protected $port;
 
-    public function __construct(string $name, string $content, $ttl = 600, int $priority = null, $weight = null, $port = null)
+    public function __construct(string $name, string $content, $ttl = 600, $priority = null, $weight = null, $port = null)
     {
         $this->name = $name;
         $this->content = $content;
@@ -88,11 +88,25 @@ abstract class AbstractRecord
 
     final public function getData(): array
     {
-        return [
+        $data = [
             'type' => $this->type,
             'name' => $this->name,
             'content' => $this->content,
             'ttl' => $this->ttl,
         ];
+
+        if (!empty($this->priority)) {
+            $data['prio'] = (int) $this->priority;
+        }
+
+        if (!empty($this->weight)) {
+            $data['weight'] = $this->weight;
+        }
+
+        if (!empty($this->port)) {
+            $data['port'] = $this->port;
+        }
+
+        return $data;
     }
 }
