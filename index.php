@@ -36,12 +36,11 @@ switch ($request->getRoutePath()) {
         break;
 
     case '/create':
-
-        $controller->createAction($request);
+        $controller->createAction($request, $dnsService);
         break;
 
     case '/delete':
-        $controller->deleteAction($request);
+        $controller->deleteAction($request, $dnsService);
         break;
 }
 

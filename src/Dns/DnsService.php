@@ -34,18 +34,11 @@ class DnsService implements DnsServiceInterface
     public function createRecord(AbstractRecord $record): void
     {
         $serviceUrl = 'https://rest.websupport.sk/v1/user/self/zone/'.$this->credentials->getDomain().'/record';
-        /*$client = new \GuzzleHttp\Client();
-        $res = $client->request('POST', $serviceUrl, [
-            'auth' => [
-                $this->credentials->getUsername(),
-                $this->credentials->getPassword()
-            ],
-            'body' => '{"type":"A","name":"@","content": "1.2.3.9","ttl": 600}'
-        ]);
-
-        var_dump($res);
-        exit;*/
         $curl = $this->initCurlWithAuth($serviceUrl);
+        curl_setopt($curl, CURLOPT_POST, true);
+        curl_setopt($curl, CURLOPT_POSTFIELDS, '{"type":"A","name":"@","content": "1.2.3.9","ttl": 600}');
+        $response = curl_exec($curl);
+        curl_close($curl);
     }
 
     public function deleteRecord(string $id)
@@ -53,7 +46,6 @@ class DnsService implements DnsServiceInterface
         $serviceUrl = 'https://rest.websupport.sk/v1/user/self/zone/'.$this->credentials->getDomain().'/record/'.$id;
         $curl = $this->initCurlWithAuth($serviceUrl);
 
-        curl_setopt($curl, CURLOPT_POST, true);
         curl_setopt($curl, CURLOPT_CUSTOMREQUEST, 'DELETE');
         $response = curl_exec($curl);
         curl_close($curl);
