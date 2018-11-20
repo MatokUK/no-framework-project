@@ -11,5 +11,7 @@ interface DnsServiceInterface
      */
     public function recordsList(): array;
 
-    public function createRecord(AbstractRecord $record): bool;
+    public function createRecord(AbstractRecord $record): void;
+
+    public function deleteRecord(string $id);
 }
