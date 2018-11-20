@@ -31,14 +31,16 @@ class DnsService implements DnsServiceInterface
         return $result;
     }
 
-    public function createRecord(AbstractRecord $record): void
+    public function createRecord(AbstractRecord $record): bool
     {
         $serviceUrl = 'https://rest.websupport.sk/v1/user/self/zone/'.$this->credentials->getDomain().'/record';
         $curl = $this->initCurlWithAuth($serviceUrl);
         curl_setopt($curl, CURLOPT_POST, true);
-        curl_setopt($curl, CURLOPT_POSTFIELDS, '{"type":"A","name":"@","content": "1.2.3.9","ttl": 600}');
-        $response = curl_exec($curl);
+        curl_setopt($curl, CURLOPT_POSTFIELDS, json_encode($record->getData()));
+        $response = json_decode(curl_exec($curl), true);
         curl_close($curl);
+
+        return $response['status'] === 'success';
     }
 
     public function deleteRecord(string $id)

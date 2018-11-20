@@ -6,7 +6,8 @@ abstract class RequestFactory
 {
     public static function createRequest(array $server, array $postData = [])
     {
-        $request = new Request([], $postData);
+        $getData = static::parseUrlQuery($server['REQUEST_URI']);
+        $request = new Request($getData, $postData);
 
         $request->setRoutePath(static::parsePath($server));
         if (!isset($server['REQUEST_METHOD'])) {
@@ -24,5 +25,22 @@ abstract class RequestFactory
         }
 
         return '/';
+    }
+
+    private static function parseUrlQuery($uri)
+    {
+        $parsed = parse_url($uri);
+        if (!isset($parsed['query'])) {
+            return [];
+        }
+        $parsedPairs = explode('&', $parsed['query']);
+
+        $result = [];
+        foreach ($parsedPairs as $parsedPair) {
+            $keyValue = explode('=', $parsedPair, 2);
+            $result[$keyValue[0]] = isset($keyValue[1]) ? $keyValue[1] : null;
+        }
+
+        return $result;
     }
 }

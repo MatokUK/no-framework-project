@@ -35,6 +35,13 @@ abstract class RecordFactory
                 throw new InvalidTypeException(sprintf('Dont know how to create "%s" type', $type));
         }
 
-        return new $class($data['name'], $data['content'], $data['ttl']);
+
+        $record = new $class($data['name'], $data['content'], isset($data['ttl']) ? $data['ttl'] : null, $data['prio'], $data['weight'], $data['port']);
+
+        if (isset($data['id'])) {
+            $record->setId($data['id']);
+        }
+
+        return $record;
     }
 }

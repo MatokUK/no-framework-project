@@ -19,21 +19,31 @@ abstract class AbstractRecord
     /** @var int */
     protected $ttl;
 
-    public function __construct(string $name, string $content, int $ttl = 600)
+    /** @var int */
+    protected $priority;
+
+    protected $weight;
+
+    protected $port;
+
+    public function __construct(string $name, string $content, $ttl = 600, int $priority = null, $weight = null, $port = null)
     {
         $this->name = $name;
         $this->content = $content;
         $this->ttl = $ttl;
+        $this->priority = $priority;
+        $this->port = $port;
+        $this->weight = $weight;
     }
 
-    public function setId()
+    public function setId($id)
     {
         $this->id = $id;
     }
 
     public function getId()
     {
-
+        return $this->id;
     }
 
     public function getType(): string
@@ -59,6 +69,21 @@ abstract class AbstractRecord
     public function setTtl(int $ttl)
     {
         $this->ttl = $ttl;
+    }
+
+    public function getPriority()
+    {
+        return $this->priority;
+    }
+
+    public function getWeight()
+    {
+        return $this->weight;
+    }
+
+    public function getPort()
+    {
+        return $this->port;
     }
 
     final public function getData(): array

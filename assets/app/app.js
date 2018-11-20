@@ -14,3 +14,6 @@ document.querySelector('#type').addEventListener('change',function(){
         document.getElementById('weight').parentNode.removeAttribute('style');
     }
 });
+
+var eventClick = new Event('change');
+document.querySelector('#type').dispatchEvent(eventClick);

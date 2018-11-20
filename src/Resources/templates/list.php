@@ -14,6 +14,7 @@
     <!-- Bootstrap core CSS -->
     <link href="/assets/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="/assets/app/app.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
@@ -55,6 +56,7 @@
                 <th>Priority</th>
                 <th>Weight</th>
                 <th>Port</th>
+                <th></th>
             </thead>
         <?php foreach($records as $record): ?>
             <tr>
@@ -62,6 +64,10 @@
                 <td><?php echo $record->getName(); ?></td>
                 <td><?php echo $record->getContent(); ?></td>
                 <td><?php echo $record->getTtl(); ?></td>
+                <td><?php echo $record->getPriority(); ?></td>
+                <td><?php echo $record->getWeight(); ?></td>
+                <td><?php echo $record->getPort(); ?></td>
+                <td><a href="/delete?id=<?php echo $record->getId(); ?>"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Remove</a></td>
             </tr>
         <?php endforeach; ?>
         </table>
@@ -70,10 +76,18 @@
 
     <div class="panel panel-default">
         <div class="panel-heading">
-            <h3 class="panel-title">Panel title</h3>
+            <h3 class="panel-title">Me & Social Networks</h3>
         </div>
         <div class="panel-body">
-            Panel content
+            <a href="https://www.codewars.com/users/MatokUK">
+                <img src="https://www.codewars.com/users/MatokUK/badges/small" alt="CodeWars">
+            </a>
+
+            <br><br>
+            <a href="https://github.com/MatokUK"><i class="fab fa-github"></i> https://github.com/MatokUK</a>
+
+            <br><br>
+            <a href="https://www.hackerrank.com/mat_kuna"><i class="fab fa-hackerrank"></i> https://www.hackerrank.com/mat_kuna</a>
         </div>
     </div>
 </div><!-- /.container -->

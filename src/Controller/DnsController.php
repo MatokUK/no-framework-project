@@ -3,7 +3,7 @@
 namespace Ws\Controller;
 
 use WS\Dns\DnsServiceInterface;
-use WS\Dns\Record\AAAARecord;
+use WS\Dns\RecordFactory\RecordFactory;
 use WS\Http\Request;
 use WS\Template\Template;
 
@@ -24,11 +24,19 @@ class DnsController
             $type = $request->post('type', 'a');
             $name = $request->post('name');
             $content = $request->post('content');
+            $ttl = $request->post('ttl', 600);
+            $priority = $request->post('priority');
+            $weight = $request->post('weight');
+            $port = $request->post('port');
 
-            var_dump($type, $name, $content);
-            $dnsService->createRecord(new AAAARecord('name', 'cont', 400));
-            exit;
-            $this->redirect('/list');
+            $record = RecordFactory::createFromArray(['type' => $type, 'name' => $name, 'content' => $content, 'ttl' => $ttl, 'prio' => $priority, 'weight' => $weight, 'port' => $port]);
+            $apiResult = $dnsService->createRecord($record);
+            if ($apiResult) {
+                $this->redirect('/list');
+            }
+
+            // fail:
+
         }
 
 
