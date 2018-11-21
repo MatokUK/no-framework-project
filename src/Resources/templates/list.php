@@ -69,8 +69,8 @@
         <?php foreach($records as $record): ?>
             <tr>
                 <td><?php echo $record->getType(); ?></td>
-                <td><?php echo $record->getName(); ?></td>
-                <td><?php echo $record->getContent(); ?></td>
+                <td><?php echo htmlspecialchars($record->getName()); ?></td>
+                <td><?php echo htmlspecialchars($record->getContent()); ?></td>
                 <td><?php echo $record->getTtl(); ?></td>
                 <td><?php echo $record->getPriority(); ?></td>
                 <td><?php echo $record->getWeight(); ?></td>
