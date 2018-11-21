@@ -8,7 +8,7 @@ class FlashMessage
 
     public function __construct()
     {
-        session_start();
+        SessionStarter::start();
     }
 
     public function addSuccess($message)

@@ -96,6 +96,7 @@
             </div>
 
             <button type="submit" class="btn btn-default">Submit</button>
+            <input type="hidden" name="token" value="<?php echo $token; ?>">
         </form>
     </div>
 

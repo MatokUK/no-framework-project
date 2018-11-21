@@ -47,6 +47,7 @@
 
     <form method="post" action="/delete?id=<?php echo $id; ?>">
         <a class="btn btn-primary" href="/list">Back to List</a> <input type="submit" class="btn btn-danger" value="Yes, delete...">
+        <input type="hidden" name="token" value="<?php echo $token; ?>">
     </form>
 
 </div><!-- /.container -->
